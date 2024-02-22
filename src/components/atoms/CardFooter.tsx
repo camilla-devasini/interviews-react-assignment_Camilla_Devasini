@@ -1,9 +1,9 @@
 import { FC } from "react";
 import {
   Box,
+  CardActions,
   CircularProgress,
   IconButton,
-  CardActions as MuiCardActions,
   Typography,
 } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
@@ -16,9 +16,9 @@ interface CardFooterProps {
 
 export const CardFooter: FC<CardFooterProps> = ({ details, action }) => {
   return (
-    <MuiCardActions>
+    <CardActions>
       <Typography variant="h6" component="div">
-        $ {details.price}
+        ${details.price}
       </Typography>
       <Box flexGrow={1} />
       <Box
@@ -59,6 +59,6 @@ export const CardFooter: FC<CardFooterProps> = ({ details, action }) => {
           <Add fontSize="small" />
         </IconButton>
       </Box>
-    </MuiCardActions>
+    </CardActions>
   );
 };

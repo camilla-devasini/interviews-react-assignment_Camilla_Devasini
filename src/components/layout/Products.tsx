@@ -58,9 +58,9 @@ export const Products = ({
 
   return (
     <Box overflow="scroll" height="100%">
-      <Grid container spacing={2} p={2}>
+      <Grid container spacing={4} p={3}>
         {products?.map((product, index) => (
-          <Grid item xs={4} key={index}>
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3} xl={2}>
             {/* Do not remove this */}
             <HeavyComponent />
             <ProductCard product={product} addToCart={addToCart} />
