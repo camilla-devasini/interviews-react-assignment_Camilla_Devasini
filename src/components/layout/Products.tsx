@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useRef } from "react";
+import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
 import { Box, Grid } from "@mui/material";
-
 import { HeavyComponent } from "../HeavyComponent.tsx";
 import { Cart } from "../../services/products/types/types.tsx";
-import { Product } from "../../services/products/types/types.tsx";
 import ProductCard from "../ProductCard.tsx";
 
 export const Products = ({
@@ -11,10 +10,12 @@ export const Products = ({
 }: {
   onCartChange: (cart: Cart) => void;
 }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const loadingMoreRef = useRef<HTMLHeadingElement | null>(null);
+  const { products, onSetProducts, isLoading, error } =
+    useInfiniteScroll(loadingMoreRef);
 
   function addToCart(productId: number, quantity: number) {
-    setProducts(
+    onSetProducts(
       products.map((product) => {
         if (product.id === productId) {
           return {
@@ -34,7 +35,7 @@ export const Products = ({
     }).then(async (response) => {
       if (response.ok) {
         const cart = await response.json();
-        setProducts(
+        onSetProducts(
           products.map((product) => {
             if (product.id === productId) {
               return {
@@ -50,11 +51,6 @@ export const Products = ({
       }
     });
   }
-  useEffect(() => {
-    fetch("/products?limit=200")
-      .then((response) => response.json())
-      .then((data) => setProducts(data.products));
-  }, []);
 
   return (
     <Box overflow="scroll" height="100%">
@@ -64,6 +60,9 @@ export const Products = ({
             {/* Do not remove this */}
             <HeavyComponent />
             <ProductCard product={product} addToCart={addToCart} />
+            {index === products.length - 1 && !isLoading ? (
+              <div ref={loadingMoreRef} />
+            ) : null}
           </Grid>
         ))}
       </Grid>
@@ -71,6 +70,7 @@ export const Products = ({
   );
 };
 
+//Commented to refactor according to instructions
 // export const Products = ({
 //   onCartChange,
 // }: {
