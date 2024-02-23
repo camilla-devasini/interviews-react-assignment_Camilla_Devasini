@@ -14,11 +14,14 @@ export const useInfiniteScroll = (
   const loadMoreProducts = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`/products?page=${page}&limit=24`);
+      const response = await fetch(`/products?page=${page}&limit=12`);
       const data = await response.json();
       setProducts((prevProducts) => [...prevProducts, ...data.products]);
       setIsLoading(false);
       setPage((prevPage) => prevPage + 1);
+      if (data.products.length === 0 && data.hasMore === false) {
+        loadingMoreRef.current?.remove();
+      }
     } catch (error) {
       setError(true);
       console.error("Error fetching products", error);
@@ -45,7 +48,7 @@ export const useInfiniteScroll = (
         }
       },
       {
-        rootMargin: "0px 0px 400px 0px",
+        rootMargin: "0px 0px 500px 0px",
         threshold: 1,
       }
     );

@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
-import { Box, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { HeavyComponent } from "../HeavyComponent.tsx";
 import { Cart } from "../../services/products/types/types.tsx";
 import ProductCard from "../ProductCard.tsx";
+import RowContainer from "../atoms/RowContainer.tsx";
 
 export const Products = ({
   onCartChange,
@@ -51,17 +52,40 @@ export const Products = ({
       }
     });
   }
+  console.log("loadingref", loadingMoreRef);
 
   return (
-    <Box overflow="scroll" height="100%">
+    <Box height="100%" position="relative">
       <Grid container spacing={4} p={3}>
         {products?.map((product, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3} xl={2}>
             {/* Do not remove this */}
             <HeavyComponent />
             <ProductCard product={product} addToCart={addToCart} />
-            {index === products.length - 1 && !isLoading ? (
-              <div ref={loadingMoreRef} />
+            {index === products.length - 1 ? (
+              <RowContainer
+                start
+                ref={loadingMoreRef}
+                position="absolute"
+                left="50%"
+                padding="1rem 0 2rem"
+              >
+                {isLoading ? (
+                  <RowContainer center>
+                    <CircularProgress />
+                  </RowContainer>
+                ) : error ? (
+                  <Typography
+                    component="p"
+                    color="text.primary"
+                    align="center"
+                    gutterBottom={true}
+                  >
+                    An error occurred while loading our products. Please try to
+                    reload the page
+                  </Typography>
+                ) : null}
+              </RowContainer>
             ) : null}
           </Grid>
         ))}

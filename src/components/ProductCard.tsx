@@ -10,7 +10,6 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product, addToCart }: ProductCardProps) {
-  console.log("product", product);
   return (
     <Card key={product.id} style={{ width: "100%" }}>
       <CardMedia component="img" height="150" image={product.imageUrl} />
