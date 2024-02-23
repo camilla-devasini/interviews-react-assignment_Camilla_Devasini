@@ -68,10 +68,9 @@ export const Products = ({
                 ref={loadingMoreRef}
                 position="absolute"
                 left="50%"
-                padding="1rem 0 2rem"
               >
                 {isLoading ? (
-                  <RowContainer center>
+                  <RowContainer center padding="1rem 0 2rem">
                     <CircularProgress />
                   </RowContainer>
                 ) : error ? (

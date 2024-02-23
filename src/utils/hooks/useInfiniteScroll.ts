@@ -16,11 +16,12 @@ export const useInfiniteScroll = (
       setIsLoading(true);
       const response = await fetch(`/products?page=${page}&limit=12`);
       const data = await response.json();
-      setProducts((prevProducts) => [...prevProducts, ...data.products]);
-      setIsLoading(false);
-      setPage((prevPage) => prevPage + 1);
       if (data.products.length === 0 && data.hasMore === false) {
         loadingMoreRef.current?.remove();
+      } else {
+        setProducts((prevProducts) => [...prevProducts, ...data.products]);
+        setIsLoading(false);
+        setPage((prevPage) => prevPage + 1);
       }
     } catch (error) {
       setError(true);
