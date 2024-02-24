@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import { Product } from "../../services/products/types/types";
+import { Product } from "../../services/products/types";
 
 interface CardFooterProps {
   details: Product;

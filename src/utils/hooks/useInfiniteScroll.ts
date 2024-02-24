@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Product } from "../../services/products/types/types";
+import { Product } from "../../services/products/types";
 
 export const useInfiniteScroll = (
   loadingMoreRef: React.RefObject<HTMLDivElement>

@@ -2,9 +2,10 @@ import { useRef } from "react";
 import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { HeavyComponent } from "../HeavyComponent.tsx";
-import { Cart } from "../../services/products/types/types.tsx";
+import { Cart } from "../../services/products/types.tsx";
 import ProductCard from "../ProductCard.tsx";
 import RowContainer from "../atoms/RowContainer.tsx";
+import { useFilter } from "../../utils/hooks/FilterContext.tsx";
 
 export const Products = ({
   onCartChange,
@@ -52,6 +53,8 @@ export const Products = ({
       }
     });
   }
+  const { filterSearchString } = useFilter();
+  console.log("filterSearchString", filterSearchString);
   console.log("loadingref", loadingMoreRef);
 
   return (

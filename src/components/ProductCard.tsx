@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia } from "@mui/material";
-import { Product } from "../services/products/types/types";
+import { Product } from "../services/products/types";
 import { CardTitle } from "./atoms/CardTitle";
 import { CardDescription } from "./atoms/CardDescription";
 import { CardFooter } from "./atoms/CardFooter";
