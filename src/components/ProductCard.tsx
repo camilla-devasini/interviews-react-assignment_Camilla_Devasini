@@ -11,7 +11,7 @@ type ProductCardProps = {
 
 export default function ProductCard({ product, addToCart }: ProductCardProps) {
   return (
-    <Card key={product.id} style={{ width: "100%" }}>
+    <Card key={product.id} style={{ width: "100%" }} data-testid="product-card">
       <CardMedia component="img" height="150" image={product.imageUrl} />
       <CardContent>
         <CardTitle title={product.name} />
