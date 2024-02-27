@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Product } from "../../services/products/types";
-import { useFilter } from "./FilterContext";
+import { useFilter } from "./useFilter";
 
 export const useInfiniteScroll = (
   loadingMoreRef: React.RefObject<HTMLDivElement>

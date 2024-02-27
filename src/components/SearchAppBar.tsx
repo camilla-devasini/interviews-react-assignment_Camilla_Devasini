@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useFilter } from "../utils/hooks/FilterContext";
+import { useFilter } from "../utils/hooks/useFilter";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

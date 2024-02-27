@@ -5,7 +5,7 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { useFilter } from "../utils/hooks/FilterContext";
+import { useFilter } from "../utils/hooks/useFilter";
 
 const drawerWidth = 180;
 

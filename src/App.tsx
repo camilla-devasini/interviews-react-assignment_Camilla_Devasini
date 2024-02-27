@@ -5,7 +5,8 @@ import { Cart } from "./services/products/types.tsx";
 import SearchAppBar from "./components/SearchAppBar.tsx";
 import { Categories } from "./components/Categories.tsx";
 import { useState } from "react";
-import { FilterProvider } from "./utils/hooks/FilterContext.tsx";
+import { FilterProvider } from "./utils/hooks/useFilter.tsx";
+import { CartProvider } from "./utils/hooks/useShoppingCart.tsx";
 
 function App() {
   const [cart, setCart] = useState<Cart>();
@@ -17,18 +18,20 @@ function App() {
   return (
     <Box height="100vh" display="flex" flexDirection="column">
       <CssBaseline />
-      <FilterProvider>
-        <SearchAppBar
-          quantity={cart?.totalItems || 0}
-          price={cart?.totalPrice || 0}
-        />
-        <Box flex={1} display="flex" flexDirection="row">
-          <Categories />
-          <Box flex={1}>
-            <Products onCartChange={onCartChange} />
+      <CartProvider>
+        <FilterProvider>
+          <SearchAppBar
+            quantity={cart?.totalItems || 0}
+            price={cart?.totalPrice || 0}
+          />
+          <Box flex={1} display="flex" flexDirection="row">
+            <Categories />
+            <Box flex={1}>
+              <Products onCartChange={onCartChange} />
+            </Box>
           </Box>
-        </Box>
-      </FilterProvider>
+        </FilterProvider>
+      </CartProvider>
     </Box>
   );
 }
