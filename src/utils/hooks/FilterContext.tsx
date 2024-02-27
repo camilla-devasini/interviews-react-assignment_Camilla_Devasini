@@ -19,8 +19,10 @@ export const useFilter = () => {
 export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [filterCategory, setFilterCategory] = useState<string>("");
-  const [filterSearchString, setFilterSearchString] = useState<string>("");
+  const [filterCategory, setFilterCategory] = useState<string | null>("");
+  const [filterSearchString, setFilterSearchString] = useState<string | null>(
+    ""
+  );
   return (
     <FilterContext.Provider
       value={{

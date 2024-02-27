@@ -5,7 +5,6 @@ import { HeavyComponent } from "../HeavyComponent.tsx";
 import { Cart } from "../../services/products/types.tsx";
 import ProductCard from "../ProductCard.tsx";
 import RowContainer from "../atoms/RowContainer.tsx";
-import { useFilter } from "../../utils/hooks/FilterContext.tsx";
 
 export const Products = ({
   onCartChange,
@@ -13,12 +12,12 @@ export const Products = ({
   onCartChange: (cart: Cart) => void;
 }) => {
   const loadingMoreRef = useRef<HTMLHeadingElement | null>(null);
-  const { products, onSetProducts, isLoading, error } =
+  const { productsData, onSetProducts, isLoading, error } =
     useInfiniteScroll(loadingMoreRef);
 
   function addToCart(productId: number, quantity: number) {
     onSetProducts(
-      products.map((product) => {
+      productsData.map((product) => {
         if (product.id === productId) {
           return {
             ...product,
@@ -38,7 +37,7 @@ export const Products = ({
       if (response.ok) {
         const cart = await response.json();
         onSetProducts(
-          products.map((product) => {
+          productsData.map((product) => {
             if (product.id === productId) {
               return {
                 ...product,
@@ -53,41 +52,41 @@ export const Products = ({
       }
     });
   }
-  const { filterSearchString } = useFilter();
-  console.log("filterSearchString", filterSearchString);
-  console.log("loadingref", loadingMoreRef);
 
   return (
     <Box height="100%" position="relative">
       <Grid container spacing={4} p={3}>
-        {products?.map((product, index) => (
+        {/* {filterProducts(products, filterSearchString) */}
+        {productsData.map((product, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3} xl={2}>
             {/* Do not remove this */}
             <HeavyComponent />
             <ProductCard product={product} addToCart={addToCart} />
-            {index === products.length - 1 ? (
-              <RowContainer
-                start
-                ref={loadingMoreRef}
-                position="absolute"
-                left="50%"
-              >
-                {isLoading ? (
-                  <RowContainer center padding="1rem 0 2rem">
-                    <CircularProgress />
-                  </RowContainer>
-                ) : error ? (
-                  <Typography
-                    component="p"
-                    color="text.primary"
-                    align="center"
-                    gutterBottom={true}
-                  >
-                    An error occurred while loading our products. Please try to
-                    reload the page
-                  </Typography>
-                ) : null}
-              </RowContainer>
+            {index === productsData.length - 1 ? (
+              <div key="edge-container">
+                <RowContainer
+                  start
+                  position="absolute"
+                  left="50%"
+                  ref={loadingMoreRef}
+                >
+                  {isLoading ? (
+                    <RowContainer center padding="1rem 0 2rem">
+                      <CircularProgress />
+                    </RowContainer>
+                  ) : error ? (
+                    <Typography
+                      component="p"
+                      color="text.primary"
+                      align="center"
+                      gutterBottom={true}
+                    >
+                      An error occurred while loading our products. Please try
+                      to reload the page
+                    </Typography>
+                  ) : null}
+                </RowContainer>
+              </div>
             ) : null}
           </Grid>
         ))}
