@@ -15,9 +15,8 @@ describe("Product Card component", () => {
           itemInCart: 0,
           loading: false,
         }}
-        addToCart={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+        addItem={function (): void {}}
+        removeItem={function (): void {}}
       />
     );
 

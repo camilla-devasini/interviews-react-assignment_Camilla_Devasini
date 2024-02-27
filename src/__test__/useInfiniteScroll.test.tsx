@@ -55,7 +55,7 @@ describe("useInfiniteScroll", () => {
     const loadingMoreRef = { current: document.createElement("div") };
     const { result } = renderHook(() => useInfiniteScroll(loadingMoreRef));
 
-    expect(result.current.products).toEqual([]);
+    expect(result.current.productsData).toEqual([]);
     expect(result.current.isLoading).toBe(true);
     expect(result.current.error).toBe(false);
   });

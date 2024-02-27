@@ -51,11 +51,16 @@ describe("Products", () => {
       },
     ];
 
-    // Mocked data for the addToCart function
-    const addToCart = jest.fn();
+    // Mocked data for the functions
+    const addItem = jest.fn();
+    const removeItem = jest.fn();
 
     const { getAllByTestId } = render(
-      <ProductCard product={products[0]} addToCart={addToCart} />
+      <ProductCard
+        product={products[0]}
+        addItem={addItem}
+        removeItem={removeItem}
+      />
     );
 
     const productCards = getAllByTestId("product-card");

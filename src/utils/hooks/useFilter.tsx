@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import { useContext, createContext, useState } from "react";
 import { FilterContextModel } from "../../services/context/types";
 
-const FilterContext = React.createContext<FilterContextModel>({
+const FilterContext = createContext<FilterContextModel>({
   filterCategory: "",
   setFilterCategory: () => {},
   filterSearchString: "",
