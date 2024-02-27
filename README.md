@@ -111,12 +111,15 @@ Node.js and npm installed on your machine
 _How to run_
 :beaver:
 
-`npm install` to update dependencies
-`npm run dev` to start the application
+- `git clone https://github.com/camilla-devasini/interviews-react-assignment_Camilla_Devasini.git` to clone this repository to your local machine
+- `cd your_project_directory` to navigate to the destination project directory
+- `npm install` to install the dependencies
+- `npm run dev` to start the application (for more info, see the scripts object of package.json)
+- Once the application is running, access it through your web browser at [http://localhost:5173/](http://localhost:5173/)
 
 _How to test_
 
-`npm run test`
+`npm run test` (for more info, see the scripts object of package.json)
 
 _Features_
 
