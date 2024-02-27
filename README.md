@@ -117,6 +117,8 @@ _How to run_
 - `npm run dev` to start the application (for more info, see the scripts object of package.json)
 - Once the application is running, access it through your web browser at [http://localhost:5173/](http://localhost:5173/)
 
+The branch containing the latest changes is `develop` branch.
+
 _How to test_
 
 `npm run test` (for more info, see the scripts object of package.json)
