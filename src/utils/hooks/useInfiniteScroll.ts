@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Product } from "../../services/products/types";
+import { Product } from "../../services/shopping/types";
 import { useFilter } from "./useFilter";
 
 export const useInfiniteScroll = (

@@ -7,14 +7,23 @@ import {
   Typography,
 } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import { Product } from "../../services/products/types";
+import { CardFooterProps, Cart, Product } from "../../services/shopping/types";
+import { useCart } from "../../utils/hooks/useShoppingCart";
 
-interface CardFooterProps {
-  details: Product;
-  action: (id: number, value: number) => void;
-}
+export const CardFooter: FC<CardFooterProps> = ({
+  details,
+  addItem,
+  removeItem,
+}) => {
+  const { cart } = useCart();
 
-export const CardFooter: FC<CardFooterProps> = ({ details, action }) => {
+  function getProductQuantity(cart: Cart, details: Product) {
+    const matchingProducts = cart.items.filter(
+      (product) => product.id === details.id
+    );
+    return matchingProducts.length;
+  }
+
   return (
     <CardActions>
       <Typography variant="h6" component="div">
@@ -38,23 +47,21 @@ export const CardFooter: FC<CardFooterProps> = ({ details, action }) => {
           {details.loading && <CircularProgress size={20} />}
         </Box>
         <IconButton
-          disabled={details.loading}
           aria-label="delete"
           size="small"
-          onClick={() => action(details.id, -1)}
+          onClick={() => removeItem(details)}
         >
           <Remove fontSize="small" />
         </IconButton>
 
         <Typography variant="body1" component="div" mx={1}>
-          {details.itemInCart || 0}
+          {getProductQuantity(cart, details)}
         </Typography>
 
         <IconButton
-          disabled={details.loading}
           aria-label="add"
           size="small"
-          onClick={() => action(details.id, 1)}
+          onClick={() => addItem(details)}
         >
           <Add fontSize="small" />
         </IconButton>

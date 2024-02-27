@@ -1,4 +1,4 @@
-import { Cart } from "../products/types";
+import { Cart } from "../shopping/types";
 export interface FilterContextModel {
   filterCategory: string | null;
   setFilterCategory: React.Dispatch<React.SetStateAction<string | null>>;

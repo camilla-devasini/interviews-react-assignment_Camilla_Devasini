@@ -5,63 +5,25 @@ import { HeavyComponent } from "../HeavyComponent.tsx";
 import { Cart } from "../../services/products/types.tsx";
 import ProductCard from "../ProductCard.tsx";
 import RowContainer from "../atoms/RowContainer.tsx";
+import { useShoppingCart } from "../../utils/hooks/useShoppingCart.tsx";
 
-export const Products = ({
-  onCartChange,
-}: {
-  onCartChange: (cart: Cart) => void;
-}) => {
+export const Products = () => {
   const loadingMoreRef = useRef<HTMLHeadingElement | null>(null);
-  const { productsData, onSetProducts, isLoading, error } =
-    useInfiniteScroll(loadingMoreRef);
-
-  function addToCart(productId: number, quantity: number) {
-    onSetProducts(
-      productsData.map((product) => {
-        if (product.id === productId) {
-          return {
-            ...product,
-            loading: true,
-          };
-        }
-        return product;
-      })
-    );
-    fetch("/cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productId, quantity }),
-    }).then(async (response) => {
-      if (response.ok) {
-        const cart = await response.json();
-        onSetProducts(
-          productsData.map((product) => {
-            if (product.id === productId) {
-              return {
-                ...product,
-                itemInCart: (product.itemInCart || 0) + quantity,
-                loading: false,
-              };
-            }
-            return product;
-          })
-        );
-        onCartChange(cart);
-      }
-    });
-  }
+  const { productsData, isLoading, error } = useInfiniteScroll(loadingMoreRef);
+  const { addItem, removeItem } = useShoppingCart();
 
   return (
     <Box height="100%" position="relative">
       <Grid container spacing={4} p={3}>
-        {/* {filterProducts(products, filterSearchString) */}
         {productsData.map((product, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3} xl={2}>
             {/* Do not remove this */}
             <HeavyComponent />
-            <ProductCard product={product} addToCart={addToCart} />
+            <ProductCard
+              product={product}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
             {index === productsData.length - 1 ? (
               <div key="edge-container">
                 <RowContainer

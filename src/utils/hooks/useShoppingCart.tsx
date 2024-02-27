@@ -1,5 +1,5 @@
 import { useContext, useState, createContext } from "react";
-import { Cart, Product } from "../../services/products/types";
+import { Cart, Product } from "../../services/shopping/types";
 import { CartContextModel } from "../../services/context/types";
 
 const CartContext = createContext<CartContextModel>({
