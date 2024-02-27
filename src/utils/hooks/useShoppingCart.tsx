@@ -37,7 +37,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-// to handle the add and remove item from the cart and update of the cart in the database
+// to handle the item add and remove from the cart and update the cart in the database
 export function useShoppingCart(): {
   cart: Cart;
   addItem: (item: Product) => void;

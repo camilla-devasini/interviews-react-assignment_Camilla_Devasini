@@ -17,6 +17,7 @@ export const useInfiniteScroll = (
     setFilterCategory,
   } = useFilter();
 
+  // to handle the loading of products by page
   const loadMoreProducts = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -38,6 +39,7 @@ export const useInfiniteScroll = (
     }
   }, [page, loadingMoreRef]);
 
+  // to handle the loading of products by searchparams representing search string or category
   const loadFilteredProducts = useCallback(
     async (filterType: string) => {
       try {

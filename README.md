@@ -109,21 +109,21 @@ _Prerequisite_
 Node.js and npm installed on your machine
 
 _How to run_
-
 :beaver:
 
-`Npm run dev`
+`npm install` to update dependencies
+`npm run dev` to start the application
 
 _How to test_
 
-`Npm run dev`
+`npm run test`
 
 _Features_
 
-[React](https://react.dev) to build the user interface
-[MUI](https://mui.com): to build and style the atomic components according to modular development
-Responsive Design: to make the interfaces adapt gracefully to various screen sizes and devices
-[Jest](https://jestjs.io): a javascript testing framework. The tests serve as an exploratory attempt and are currently not comprehensive.
+- [React](https://react.dev) to build the user interface
+- [MUI](https://mui.com): to build and style the atomic components according to modular development
+- Responsive Design: to make the interfaces adapt gracefully to various screen sizes and devices
+- [Jest](https://jestjs.io): a javascript testing framework. The tests serve as an exploratory attempt and are currently not comprehensive.
 
 _Context_
 
@@ -136,21 +136,21 @@ _Goal_: the items shown to the client will be loaded dynamically, as the user sc
 Within a custom hook called useInfiniteScroll, I have defined a function to asynchronously fetch additional products. By leveraging the fetch API, it requests more products from the server, passing parameters for pagination and the limit of products per page.
 It updates the page number to prepare for fetching the next page of products.
 
-The function is triggered through the setting of an intersection observer, that is responsible to detect a reference element defined once the last product become visible on the screen. When this element become visible in the viewport, meaning when the user is scrolling to the bottom of the page, the function executes and calls a new batch of products is called.
+The function is triggered through the setting of an intersection observer, that is responsible to detect a reference element defined once the last product become visible on the screen. When this element become visible in the viewport, meaning when the user is scrolling to the bottom of the page, the function executes and calls a new batch of products.
 
 _Task 2: Categories and search filter_
 
-_Goal_: the client will be able to search a product by typing the product name into a search bar located in the header or to filter the products by selecting a category through a side menu.
+_Goal_: the client will be able to search a product by typing the product name into a search bar located in the header, or to filter the products by selecting a category through a side menu.
 In this case, only the products searched or filtered by category will be displayed.
 
-First of all, in order to share and update the values relative to the search string typed by the user across components, I have defined a context through React.createContext API.
+First of all, in order to share and update the values relative to the search string typed by the useracross components, I have defined a context through React.createContext API.
 
-Then, I have created a function that handles the products loading filtered according to the search string or the category selected.
-The server endpoint is called passing the params respectively of q and category.
+Then, I have created a function that handles the products loading filtering them according to the search string or the category selected.
+The server endpoint is called passing the params respectively of `q` and `category`.
 
 _Task 2: Add to cart_
 
 _Goal_: the client will be able to add or remove items to the cart.
 The cart icon in the header will immediatly show the total price and the total quantity of products collected. Also the product card selected will show the desired quantity.
 
-To enhance the user experience by minimising the time it takes for a selected product to appear in the uploaded cart, I have considered that the most of time was actually taken by the fetch call to the server endpoint to update the database through a “post” call. For this reason, I have implemented a shared context for the shopping cart. The functions aimed at adding and removing an item from the cart interact with this state, while there is also an update function that triggers an asynchronous update to the database to reflect the changes. In this way the UI is immediately updated and visible for the user, while the relative update of the database cart occurs behind the scenes.
+To enhance the user experience by minimising the time it takes for a selected product to appear in the uploaded cart, I have considered that the most of time was actually taken by the fetch call to the server endpoint to update the database through a “post” call. The time difference was 1300ms on average. For this reason, I have implemented a shared context to handle the shopping cart. Then, the functions aimed at adding and removing an item from the cart interact with this shared state, while a separate function triggers an asynchronous update to the database to reflect the cart changes. In this way the UI is immediately updated and visible for the user, while the relative update of the database cart occurs behind the scenes. The user will not need to wait anymore to see the cart updated after adding or removing a product.

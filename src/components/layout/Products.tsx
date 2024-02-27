@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { HeavyComponent } from "../HeavyComponent.tsx";
-import { Cart } from "../../services/products/types.tsx";
 import ProductCard from "../ProductCard.tsx";
 import RowContainer from "../atoms/RowContainer.tsx";
 import { useShoppingCart } from "../../utils/hooks/useShoppingCart.tsx";
